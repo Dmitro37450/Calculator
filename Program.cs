@@ -1,8 +1,11 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
+using Microsoft.VisualBasic;
+
 int result = 0;
 int input;
 char operation;
+char[] availableOperations = { '+', '-', '/', '*' };
 
 static int addition(int y, int x = 0) {
     return x + y;
@@ -21,18 +24,11 @@ static int division(int y, int x = 0) {
     return y / x;
 }
 
-// Core function
-do {
-    Console.Write("Input number 1: ");
-    result = Convert.ToInt16(Console.ReadLine());
-    Console.Write("Input number 2: ");
-    input = Convert.ToInt16(Console.ReadLine());
-    
+void operationChoose()
+{
     bool valid = false;
-    do {
-        Console.Clear();
-        Console.WriteLine(Convert.ToString(result));
-        Console.WriteLine("Input: " + Convert.ToString(input) + '\n');
+    do
+    {
         Console.WriteLine("[+]: Addition");
         Console.WriteLine("[-]: Subtraction");
         Console.WriteLine("[*]: Multiplication");
@@ -41,31 +37,47 @@ do {
         Console.Write("Choose operation: ");
         operation = Console.ReadKey().KeyChar;
 
-        switch (operation)
+        if (!availableOperations.Contains(operation))
         {
-            default:
             Console.ForegroundColor = ConsoleColor.Red;
             Console.WriteLine("\nInvalid operation!");
             Console.ResetColor();
             Console.WriteLine("Press anything to continue.");
             Console.ReadKey();
-            break;
         }
-
-        if (valid) {
-            valid = false;
-        }
+        else { valid = true; }
 
     } while (!valid);
-    
-} while(true);
-/*
-Console.Write("Input number 1: ");
+}
+// Core function
+
+Console.Write("Input number: ");
 result = Convert.ToInt16(Console.ReadLine());
-Console.Write("Input number 2: ");
-input = Convert.ToInt16(Console.ReadLine());
+operationChoose();
 
-Console.WriteLine(Convert.ToString(division(input, result)));
-
-// Console.WriteLine(Convert.ToString(plus()));
-*/
+do
+{
+    Console.Write("\nInput number: ");
+    input = Convert.ToInt16(Console.ReadLine());
+    switch (operation)
+    {
+        case '+':
+            addition(input, result);
+            break;
+        case '-':
+            subtraction(input, result);
+            break;
+        case '*':
+            multiplication(input, result);
+            break;
+        case '/':
+            division(input, result);
+            break;
+        default:
+            Console.BackgroundColor = ConsoleColor.Red;
+            Console.WriteLine("\nSomething Went Wrong!");
+            Environment.Exit(0);
+            break;
+    }
+    operationChoose();
+} while (true);

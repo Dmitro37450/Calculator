@@ -20,8 +20,8 @@ static int multiplication(int y, int x = 0) {
 }
 
 static int division(int y, int x = 0) {
-    if(x==0) return 0;
-    return y / x;
+    if (x == 0) return 0;
+    return x / y;
 }
 
 void operationChoose()
@@ -62,16 +62,16 @@ do
     switch (operation)
     {
         case '+':
-            addition(input, result);
+            result = addition(input, result);
             break;
         case '-':
-            subtraction(input, result);
+            result = subtraction(input, result);
             break;
         case '*':
-            multiplication(input, result);
+            result = multiplication(input, result);
             break;
         case '/':
-            division(input, result);
+            result = division(input, result);
             break;
         default:
             Console.BackgroundColor = ConsoleColor.Red;
@@ -79,5 +79,9 @@ do
             Environment.Exit(0);
             break;
     }
+
+    //Console.Clear();
+    Console.WriteLine("\nResult: "+result);
+
     operationChoose();
 } while (true);

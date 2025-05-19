@@ -26,7 +26,6 @@ static int division(int y, int x = 0) {
 
 void operationChoose()
 {
-    bool valid = false;
     do
     {
         Console.WriteLine("[+]: Addition");
@@ -45,9 +44,12 @@ void operationChoose()
             Console.WriteLine("Press anything to continue.");
             Console.ReadKey();
         }
-        else { valid = true; }
+        else
+        {
+            break;
+        }
 
-    } while (!valid);
+    } while (true);
 }
 // Core function
 
